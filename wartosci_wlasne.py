@@ -13,8 +13,8 @@ from ortogonalizacja import macierz_A_z_QR, macierz_Q, macierz_R
 def is_matrix_upper_triangular(matrix):
     for ind, vector in enumerate(matrix):
         if sum(vector[:ind]) > 0.000001:
-            print("suma z ind ", ind," :",sum(vector[:ind]))
-            print(vector)
+            # print("suma z ind ", ind," :",sum(vector[:ind]))
+            # print(vector)
             return False
     return True
 
@@ -31,25 +31,34 @@ def find_matrix_eigenvalues(matrix):
     while(not is_upper_triangular):
         ak = ak_next(ak)
         is_upper_triangular = is_matrix_upper_triangular(ak)
-    return np.diag(ak)
+    return np.diag(np.round(ak,3))
 
 
-macierz_a = [[2., 1., 3.],[1., 6., 7.],[3., 7., 9.]]
-macierz_d = [[0., 1., 2.],[1., 0., 7.],[9., 7., 9.]]
-macierz_b = [[2., 1., 3.],[0., 6., 7.],[0., 0., 9.]]
+# macierz_a = [[2., 1., 3.],[1., 6., 7.],[3., 7., 9.]]
+# macierz_d = [[0., 1., 2.],[1., 0., 7.],[9., 7., 9.]]
+# macierz_b = [[2., 1., 3.],[0., 6., 7.],[0., 0., 9.]]
+# a = np.array(
+#     [
+#         [1.0, 2.0, 3.0, 4.0, 5.0],
+#         [2.0, 2.0, 3.0, 4.0, 5.0],
+#         [3.0, 3.0, 3.0, 4.0, 5.0],
+#         [4.0, 4.0, 4.0, 4.0, 5.0],
+#         [5.0, 5.0, 5.0, 5.0, 5.0],
+#     ])
 
-macierz_c = np.array(macierz_b)
+# # macierz_c = np.array(macierz_b)
+# macierz_c = a
 
-macierz_q = macierz_Q(macierz_c.copy())
-macierz_r = macierz_R(macierz_c.copy())
+# macierz_q = macierz_Q(macierz_c.copy())
+# macierz_r = macierz_R(macierz_c.copy())
 
-macierz_qr = macierz_A_z_QR(macierz_q.copy(), macierz_r.copy())
+# macierz_qr = macierz_A_z_QR(macierz_q.copy(), macierz_r.copy())
 
-print("macierz A: ",macierz_c, sep="\n")
-print("macierz Q: ",macierz_q, sep="\n")
-print("macierz R: ",macierz_r, sep="\n")
-print("macierz QR = A: ",np.around(macierz_qr,1), sep="\n")
-# -----------------------------------------------------------------
-wlasne = find_matrix_eigenvalues(macierz_c.copy())
-print("--------------------------------------------",wlasne,sep="\n")
-print(np.linalg.eigvals(macierz_c.copy()))
+# print("macierz A: ",macierz_c, sep="\n")
+# print("macierz Q: ",macierz_q, sep="\n")
+# print("macierz R: ",macierz_r, sep="\n")
+# print("macierz QR = A: ",np.around(macierz_qr,1), sep="\n")
+# # -----------------------------------------------------------------
+# wlasne = find_matrix_eigenvalues(macierz_c.copy())
+# print("--------------------------------------------",wlasne,sep="\n")
+# print(np.linalg.eigvals(macierz_c.copy()))
