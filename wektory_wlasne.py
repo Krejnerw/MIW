@@ -51,7 +51,8 @@ print(
 )
 # [19.5980 -3.1850 -0.7500 -0.3850| -0.2770]
 
-for eigenvalue in matrix_eigenvalues:
+# for eigenvalue in matrix_eigenvalues:
+for eigenvalue in [-3.1850]:
     print("=== ", eigenvalue, " ================")
 
     temp_matrix = matrix.copy()
