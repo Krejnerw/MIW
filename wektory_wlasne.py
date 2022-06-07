@@ -30,65 +30,67 @@ def gauss(matrix):
     return [np.round(matrix[y][size - 1], 3) for y in range(size - 1)]
 
 
-a = [
-    [1.0, 2.0, 3.0, 4.0, 5.0],
-    [2.0, 2.0, 3.0, 4.0, 5.0],
-    [3.0, 3.0, 3.0, 4.0, 5.0],
-    [4.0, 4.0, 4.0, 4.0, 5.0],
-    [5.0, 5.0, 5.0, 5.0, 5.0],
-]
-b = [[-26.0, -33.0, -25.0], [31.0, 42.0, 23.0], [-11.0, -15.0, -4.0]]
+def eigenvectors(matrix):
+    u = []
+    size = len(matrix[0])
+    matrix_eigenvalues = find_matrix_eigenvalues(matrix)
+    for eigenvalue in sorted(matrix_eigenvalues, reverse=True):
+        # print("=== ", eigenvalue, " ================")
 
-matrix = np.array(a)
-size = len(matrix[0])
-matrix_eigenvalues = find_matrix_eigenvalues(matrix)
-print(
-    "-----------------------------------",
-    "         wartosci wlasne",
-    matrix_eigenvalues,
-    "\n",
-    sep="\n",
-)
-# [19.5980 -3.1850 -0.7500 -0.3850| -0.2770]
+        temp_matrix = matrix.copy()
+        for i in range(size):
+            temp_matrix[i][i] = np.round(temp_matrix[i][i] - eigenvalue, 3)
 
-# for eigenvalue in matrix_eigenvalues:
-for eigenvalue in [-3.1850]:
-    print("=== ", eigenvalue, " ================")
+        gauss1 = gauss(temp_matrix)
 
-    temp_matrix = matrix.copy()
-    for i in range(size):
-        temp_matrix[i][i] = np.round(temp_matrix[i][i] - eigenvalue, 3)
+        wek_wlasn = [round(y * -1, 4) for y in gauss1] + [1]
+        u.append(wek_wlasn)
+        # print("***wektor wlasny: ***")
+        # print(
+        #     wek_wlasn,
+        #     "\n",
+        # )
+    u = np.array(u)
+    return u
 
-    gauss1 = gauss(temp_matrix)
 
-    wek_wlasn = [round(y * -1, 4) for y in gauss1] + [1]
-    print("***wektor wlasny: ***")
-    print(
-        wek_wlasn,
-        "\n",
-    )
+# a = [
+#     [1.0, 2.0, 3.0, 4.0, 5.0],
+#     [2.0, 2.0, 3.0, 4.0, 5.0],
+#     [3.0, 3.0, 3.0, 4.0, 5.0],
+#     [4.0, 4.0, 4.0, 4.0, 5.0],
+#     [5.0, 5.0, 5.0, 5.0, 5.0],
+# ]
+# b = [[-26.0, -33.0, -25.0], [31.0, 42.0, 23.0], [-11.0, -15.0, -4.0]]
+# matrix = np.array(b)
 
-    # ===  19.598  ================
-    # ***wektor wlasny: ***
-    # [0.645, 0.678, 0.745, 0.851, 1]
-    #    +      +       +      +
+# c = [[1.,2.,0.],[2.,0.,2.]]
+# c = np.array(c)
+# matrix = np.dot(c,c.T)
 
-    # ===  -3.185  ================
-    # ***wektor wlasny: ***
-    # [-1.152, -0.79, -0.181, 0.486, 1]
-    #      +      +       +     +
+# print(eigenvectors(matrix))
 
-    # ===  -0.75  ================
-    # ***wektor wlasny: ***
-    # [1.109, -0.37, -1.355, -0.534, 1]
-    #    +      +    -1.356     +
+# ===  19.598  ================
+# ***wektor wlasny: ***
+# [0.645, 0.678, 0.745, 0.851, 1]
+#    +      +       +      +
 
-    # ===  -0.385  ================ > -0.386
-    # ***wektor wlasny: ***
-    # [-1.098, 1.755, 0.05, -1.785, 1]
-    #  -1.102  1.756  0.062 -1.793
+# ===  -3.185  ================
+# ***wektor wlasny: ***
+# [-1.152, -0.79, -0.181, 0.486, 1]
+#      +      +       +     +
 
-    # ===  -0.277  ================
-    # ***wektor wlasny: ***
-    # [1.106, -2.887, 3.542, -2.816, 1]
-    #  1.100  -2.873  3.528  -2.811
+# ===  -0.75  ================
+# ***wektor wlasny: ***
+# [1.109, -0.37, -1.355, -0.534, 1]
+#    +      +    -1.356     +
+
+# ===  -0.385  ================ > -0.386
+# ***wektor wlasny: ***
+# [-1.098, 1.755, 0.05, -1.785, 1]
+#  -1.102  1.756  0.062 -1.793
+
+# ===  -0.277  ================
+# ***wektor wlasny: ***
+# [1.106, -2.887, 3.542, -2.816, 1]
+#  1.100  -2.873  3.528  -2.811
